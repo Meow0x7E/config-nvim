@@ -1,14 +1,59 @@
-local g = vim.g
-local set = vim.keymap.set
-local opt = { noremap = true, silent = true }
+local optional = require("meow0x7e.optional")
 
-g.mapleader = " "
-g.maplocalleader = " "
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
-set("n", "<leader>-", "<cmd>split<cr>", opt)
-set("n", "<leader>\\", "<cmd>vsplit<cr>", opt)
+local function configureKeymaps(table, defOpt)
+    local isString = optional.isString
+    local isTable = optional.isTable
+    local isTableElse = optional.isTableElse
 
-set("n", "<C-Left>", "<CMD>vertical resize -2<CR>", opt)
-set("n", "<C-Down>", "<CMD>resize +2<CR>", opt)
-set("n", "<C-Up>", "<CMD>resize -2<CR>", opt)
-set("n", "<C-Right>", "<CMD>vertical resize +2<CR>", opt)
+    isTable(table)
+    isTable(defOpt)
+
+    local function setKeymap(mode, table, defOpt)
+        vim.api.nvim_set_keymap(
+            mode, 
+            isString(table[1]), 
+            isString(table[2]), 
+            isTableElse(table[3], defOpt)
+        )
+    end
+
+    local function processKeymapTable(mode, table, defOpt)
+        for _, v in ipairs(table) do
+            setKeymap(mode, isTable(v), defOpt)
+        end
+    end
+
+    for k, v in pairs(table) do
+        processKeymapTable(isString(k), isTable(v), defOpt)
+    end
+end
+
+configureKeymaps({
+    ["n"] = {
+        { "<leader>-", ":split<cr>" },
+        { "<leader>\\", ":vertical split<cr>" },
+        { "<leader>sc", "<C-w>c" },
+        { "<leader>so", "<C-w>o" },
+        { "<C-h>", "<C-w>h" },
+        { "<C-j>", "<C-w>j" },
+        { "<C-k>", "<C-w>k" },
+        { "<C-l>", "<C-w>l" },
+        { "<C-Left>", ":vertical resize -2<cr>" },
+        { "<C-Down>", ":resize +2<cr>" },
+        { "<C-Up>", ":resize -2<cr>" },
+        { "<C-Right>", ":vertical resize +2<cr>" },
+        { "J", "8j" },
+        { "K", "8k" }
+    },
+    ["v"] = {
+        { "<", "<gv" },
+        { ">", ">gv" }
+    }
+},
+{
+    noremap = false,
+    silent = false 
+})

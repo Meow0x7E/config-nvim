@@ -1,9 +1,23 @@
-local opt=vim.opt
+vim.o.number=true
+vim.o.relativenumber=true
 
-opt.number=true
-opt.relativenumber=true
+vim.o.expandtab=true
+vim.o.tabstop=4
+vim.o.softtabstop=4
+vim.o.shiftwidth=4
 
-opt.expandtab=true
-opt.tabstop=4
-opt.softtabstop=4
-opt.shiftwidth=4
+vim.o.wrap = false
+
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+vim.o.cursorline = true
+
+vim.o.splitright = true
+vim.o.splitbelow = true
+
+vim.o.ignorecase = true
+vim.o.smartcase = true
+
+vim.o.termguicolors = true
+vim.o.signcolumn = "yes"
