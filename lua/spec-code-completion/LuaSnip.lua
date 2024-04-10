@@ -1,6 +1,6 @@
 return {
     "L3MON4D3/LuaSnip",
-    lazy = false,
+    lazy = true,
     -- install jsregexp (optional!).
     build = "make install_jsregexp",
     -- follow latest release.

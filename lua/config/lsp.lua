@@ -1,0 +1,19 @@
+return {
+    "bashls",
+    "clangd",
+    "cmake",
+    "cssls",
+    "html",
+    "jsonls",
+    "jdtls",
+    "tsserver",
+    "kotlin_language_server",
+    "lua_ls",
+    "markdown_oxide",
+    "basedpyright",
+    "rust_analyzer",
+    "taplo",
+    "vuels",
+    "lemminx",
+    "hydra_lsp"
+}
