@@ -1,6 +1,6 @@
 return {
     "williamboman/mason-lspconfig.nvim",
-    lazy = false,
+    lazy = true,
     dependencies = {
         "williamboman/mason.nvim"
     },
@@ -8,7 +8,6 @@ return {
         ensure_installed = {
             "bashls",
             "clangd",
-            "csharp_ls",
             "cmake",
             "cssls",
             "html",
@@ -19,7 +18,6 @@ return {
             "lua_ls",
             "markdown_oxide",
             "basedpyright",
-            "ruby_ls",
             "rust_analyzer",
             "taplo",
             "vuels",

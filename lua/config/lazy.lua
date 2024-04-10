@@ -24,7 +24,7 @@ end
 require("lazy").setup({
     spec = getLocalSpec({
         "plugins",
-        -- "language-server-protocol",
+        "language-server-protocol",
         -- "code-completion"
     }),
     git = { url_format = "https://mirror.ghproxy.com/github.com/%s.git" },
