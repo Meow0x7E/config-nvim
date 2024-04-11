@@ -1,9 +1,6 @@
 return {
     "nvim-lualine/lualine.nvim",
-    lazy = false,
+    lazy = true,
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {
-        icons_enabled = true,
-        theme = "vscode"
-    }
+    opts = { icons_enabled = true }
 }
