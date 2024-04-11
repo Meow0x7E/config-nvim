@@ -1,27 +1,23 @@
 local type = require("meow0x7e.type")
 local optional = require("meow0x7e.optional")
 
-local function init()
-    local enabled = { name = "", bool = false }
-    return function(name, bool)
-        if bool and enabled.bool then
-            error(enabled.name .. ":" .. name, 2)
-        elseif bool then
-            enabled.name = name
-            enabled.bool = bool
-        end
-        return bool
+-- 使配色互斥，同时只能有一个启用
+local enabled = { name = "", bool = false }
+function try(name, bool)
+    if bool and enabled.bool then
+        error(enabled.name .. ":" .. name, 2)
+    elseif bool then
+        enabled.name = name
+        enabled.bool = bool
     end
+    return bool
 end
 
-local function colorscheme(args, index)
-    local cmd = "colorscheme "
-    if type.isTable(args) then
-        cmd = cmd .. args[optional.isNumber(index)]
-    elseif type.isString(args) then
-        cmd = cmd .. args
-    else
-        return nil
+local function colorscheme(str, args, i)
+    local cmd = "colorscheme " .. optional.isString(str)
+
+    if type.isTable(args) and type.isNumber(i) then
+        cmd:format(args[i])
     end
 
     return function()
@@ -29,34 +25,29 @@ local function colorscheme(args, index)
     end
 end
 
-local function formatScheme(f, args)
-    local R = {}
-    for _, v in ipairs(args) do
-        R[#R + 1] = f .. v
+local function makePlugin(t)
+    local R = { lazy = false, priority = 1000 }
+    for k, v in pairs(t) do
+        R[k] = v
     end
     return R
 end
 
-local lambda = init()
-
-return{
-    {
+return {
+    makePlugin {
         "Mofiqul/vscode.nvim",
-        lazy = false,
-        enabled = lambda("Mofiqul/vscode.nvim", true),
+        enabled = try("Mofiqul/vscode.nvim", true),
         dependencies = { "nvim-lualine/lualine.nvim" },
         config = colorscheme("vscode")
     },
-    {
+    makePlugin {
         "folke/tokyonight.nvim",
-        lazy = false,
-        enabled = lambda("folke/tokyonight.nvim", false),
-        config = colorscheme(
-            formatScheme("tokyonight-", {
+        enabled = try("folke/tokyonight.nvim", false),
+        config = colorscheme("tokyonight-%s", {
                 --[[1]]"night",
                 --[[2]]"moon",
                 --[[3]]"storm",
                 --[[4]]"day"
-            }), 1)
+            }, 1)
     }
 }
