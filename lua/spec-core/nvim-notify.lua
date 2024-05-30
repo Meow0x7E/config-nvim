@@ -3,7 +3,7 @@ return {
     lazy = false,
     opts = {
         background_colour = "#000000",
-        fps = 24,
+        fps = 8,
         icons = {
             DEBUG = "",
             ERROR = "",
@@ -19,7 +19,7 @@ return {
         -- 4 - Error
         -- 5 - None
         --]]
-        level = 0,
+        level = 5,
         minimum_width = 64,
         render = ({
             --[[1]]"default",
@@ -33,7 +33,7 @@ return {
             --[[2]]"fade",
             --[[3]]"slide",
             --[[4]]"static"
-        })[1],
+        })[4],
         time_formats = {
             notification = "%T",
             notification_history = "%FT%T"

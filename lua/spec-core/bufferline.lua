@@ -1,5 +1,7 @@
 return {
     "akinsho/bufferline.nvim",
+    -- 这是一个临时修复
+    branch = "main",
     lazy = false,
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {

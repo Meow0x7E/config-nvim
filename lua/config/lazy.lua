@@ -23,8 +23,7 @@ end
 
 require("lazy").setup({
     spec = getLocalSpec({
-        "base",
-        "optional-visual-expansion",
+        "core",
         "language-server-protocol",
         "code-completion"
     }),
