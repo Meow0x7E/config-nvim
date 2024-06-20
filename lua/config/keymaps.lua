@@ -4,25 +4,22 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 local function configureKeymaps(table, defOpt)
-	local isString = optional.isString
-	local isTable = optional.isTable
-	local isTableElse = optional.isTableElse
+	local iS = optional.isString
+	local iT = optional.isTable
+	local iTE = optional.isTableElse
 
-	isTable(table)
-	isTable(defOpt)
-
-	local function setKeymap(mode, table, defOpt)
-		vim.api.nvim_set_keymap(mode, isString(table[1]), isString(table[2]), isTableElse(table[3], defOpt))
-	end
+	iT(table)
+	iT(defOpt)
 
 	local function processKeymapTable(mode, table, defOpt)
 		for _, v in ipairs(table) do
-			setKeymap(mode, isTable(v), defOpt)
+			iT(v)
+			vim.api.nvim_set_keymap(mode, iS(v[1]), iS(v[2]), iTE(v[3], defOpt))
 		end
 	end
 
 	for k, v in pairs(table) do
-		processKeymapTable(isString(k), isTable(v), defOpt)
+		processKeymapTable(iS(k), iT(v), defOpt)
 	end
 end
 
