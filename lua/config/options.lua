@@ -22,3 +22,5 @@ vim.o.termguicolors = true
 vim.o.signcolumn = "yes"
 
 vim.o.modeline = true
+
+vim.o.fileencodings = "ucs-bom,utf-8,gbk,default,latin1"
