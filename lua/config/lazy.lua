@@ -17,7 +17,7 @@ require("lazy").setup({
 		{ "LazyVim/LazyVim", import = "lazyvim.plugins" },
 		{ import = "plugins" },
 	},
-	git = { url_format = "https://mirror.ghproxy.com/github.com/%s.git" },
+	git = { url_format = "https://ghproxy.net/github.com/%s.git" },
 	defaults = {
 		lazy = false,
 		version = "*",
